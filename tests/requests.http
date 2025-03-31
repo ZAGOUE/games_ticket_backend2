@@ -1,0 +1,185 @@
+### GET request to example server
+GET https://examples.http-client.intellij.net/get
+    ?generated-in=IntelliJ IDEA
+
+
+
+### Créer un Utilisateur -OK
+POST http://127.0.0.1:8000/api/users
+Content-Type: application/json
+
+{
+  "first_name": "Antoine",
+  "last_name": "LOULOU",
+  "email": "antoine.loulou@example.com",
+  "password": "antoine123"
+}
+### Créer un Utilisateur
+POST http://127.0.0.1:8000/api/users
+Content-Type: application/json
+
+{
+  "first_name": "Gaspard",
+  "last_name": "LOULOU",
+  "email": "gaspard.loulou@example.com",
+  "password": "gaspard123"
+}
+
+### Authentification (Login) - OK
+POST http://127.0.0.1:8000/api/login
+Content-Type: application/json
+
+{
+  "email": "utilisateur@example.com",
+  "password": "passe123"
+}
+
+### Rechercher utilisateur par ID - OK
+GET http://127.0.0.1:8000/api/users/1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDIyODQzMTAsImV4cCI6MTc0MjI4NzkxMCwicm9sZXMiOlsiVVNFUiJdLCJ1c2VybmFtZSI6InV0aWxpc2F0ZXVyQGV4YW1wbGUuY29tIn0.J3CzhFNapR3Xh1mqCosLO328oqCQ5WSQTRTHNQcH6K3VF6stUIK84_Bigr6MrngQQAXPszUBluZUxEpfIO6eT3gX4hgg7psCQpTp7nVe61h3LrNr9iE9RjnzlINN13xGp3TjzxXsMFtQPnIQIKaXaLX7hxfEysXklbt3dEv7649odStKHeg8fV-XZMKq8crL5xWNEp9UaCRWxiwSMFsHIZvSlr4fINafBqFMZpSBTm5xAxBY93aGBO8rETvN3hDdpVCYRj6TI8L_ermXsO_3mSmWuml29PSgQAXg1iTUtD0V_F1ezYpkMTSuVRUJClztT2aPvD_nqeaWbfsFpG3IZw
+
+### Créer une offre (🔐 Admin uniquement) - OK
+POST http://127.0.0.1:8000/api/offers
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDIyOTA5NzcsImV4cCI6MTc0MjI5NDU3Nywicm9sZXMiOlsiUk9MRV9BRE1JTiJdLCJ1c2VybmFtZSI6ImFkbWluMkBleGFtcGxlLmNvbSJ9.EAbgHtIsSY8jVRNTUwR-JBR307VqkVbkrHpr9u_hh4KIwB4eNGVZQ4ofpHp8u1CEroXpUn5d9AehJ9g5JD_HtlJByHEcIioXo5z3v_n2POSfq3AmKaToRSQlH_8cLRswUtV85-Elb9eQxS6T7-PaWa7BcN6tsv-Zl5Q6uk3kGLe3VHw1G4Y0GgCaIAo6cGTYBHLc-fuRUrP4absqbeLqnI7LD4nmqwHIoGDKzvKbPPdmiAyf3J2FMWBaXobNrKe7qJdZlgZbne6PQqmU3c9yuE6_-RziB3pEdHVqZZN6_vdV_roHKgrXdzqOb6nho_wdzYSdU6YrUjupxTUIx5QeQA
+
+{
+  "name": "Billet VIP",
+  "description": "Accès premium pour l'événement",
+  "price": 150.00,
+  "max_people": 5
+}
+### Créer une offre 2 (🔐 Admin uniquement) - OK
+POST http://127.0.0.1:8000/api/offers
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDIyOTA5NzcsImV4cCI6MTc0MjI5NDU3Nywicm9sZXMiOlsiUk9MRV9BRE1JTiJdLCJ1c2VybmFtZSI6ImFkbWluMkBleGFtcGxlLmNvbSJ9.EAbgHtIsSY8jVRNTUwR-JBR307VqkVbkrHpr9u_hh4KIwB4eNGVZQ4ofpHp8u1CEroXpUn5d9AehJ9g5JD_HtlJByHEcIioXo5z3v_n2POSfq3AmKaToRSQlH_8cLRswUtV85-Elb9eQxS6T7-PaWa7BcN6tsv-Zl5Q6uk3kGLe3VHw1G4Y0GgCaIAo6cGTYBHLc-fuRUrP4absqbeLqnI7LD4nmqwHIoGDKzvKbPPdmiAyf3J2FMWBaXobNrKe7qJdZlgZbne6PQqmU3c9yuE6_-RziB3pEdHVqZZN6_vdV_roHKgrXdzqOb6nho_wdzYSdU6YrUjupxTUIx5QeQA
+
+{
+  "name": "Billet Ultra VIP",
+  "description": "Accès premium pour l'événement",
+  "price": 200.00,
+  "max_people": 5
+}
+### Créer une offre 3 (🔐 Admin uniquement) - OK
+POST http://127.0.0.1:8000/api/offers
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDIyOTA5NzcsImV4cCI6MTc0MjI5NDU3Nywicm9sZXMiOlsiUk9MRV9BRE1JTiJdLCJ1c2VybmFtZSI6ImFkbWluMkBleGFtcGxlLmNvbSJ9.EAbgHtIsSY8jVRNTUwR-JBR307VqkVbkrHpr9u_hh4KIwB4eNGVZQ4ofpHp8u1CEroXpUn5d9AehJ9g5JD_HtlJByHEcIioXo5z3v_n2POSfq3AmKaToRSQlH_8cLRswUtV85-Elb9eQxS6T7-PaWa7BcN6tsv-Zl5Q6uk3kGLe3VHw1G4Y0GgCaIAo6cGTYBHLc-fuRUrP4absqbeLqnI7LD4nmqwHIoGDKzvKbPPdmiAyf3J2FMWBaXobNrKe7qJdZlgZbne6PQqmU3c9yuE6_-RziB3pEdHVqZZN6_vdV_roHKgrXdzqOb6nho_wdzYSdU6YrUjupxTUIx5QeQA
+
+{
+  "name": "Billet Famille",
+  "description": "Accès premium pour l'événement",
+  "price": 500.00,
+  "max_people": 4
+}
+### Créer une offre 4 (🔐 Admin uniquement) - OK
+POST http://127.0.0.1:8000/api/offers
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDIyOTM3MjUsImV4cCI6MTc0MjI5NzMyNSwicm9sZXMiOlsiUk9MRV9BRE1JTiJdLCJ1c2VybmFtZSI6ImFkbWluM0BleGFtcGxlLmNvbSJ9.RennpE6GNeThdhjAleXED0PJ-miFPRjwwYPMV2Ecf7wxwZVxSQQt-emEqFWnWdgbSblAet6Nz_mH8c8I_Q2cm1brWCC2BLTRw1EVyJ6yO_8gk7sZPF4V1sXEHqGZScOoPkZColHsEyONANPoNLJ5ajxHyAp7zwkdTr53SnfUb0C0vmZWJBJ9dpGPTWLZIHl4E0yGTkJeXv9BaGNBJqxlFcuFl8yN18sY_TzxJL-UdIXGg3BX2nBDjLtr8SeDALoBoqQz9_MASLxhaEpXUKTpYkkT_H7AQ5P2ZdLDU4NHtkbVRLh4D-JCcY3T7w7lWXZAmmDF4WmVw9eTsguqlV3s0A
+
+{
+  "name": "Billet High Famille",
+  "description": "Accès premium pour l'événement",
+  "price": 700.00,
+  "max_people": 4
+}
+
+### Lister toutes les offres - OK
+GET http://127.0.0.1:8000/api/offers
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDMwNzkwOTQsImV4cCI6MTc0MzA4MjY5NCwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoidXRpbGlzYXRldXJAZXhhbXBsZS5jb20ifQ.ZTJssJGI6EOBzdU4tUIWcRyGEVV8J4FY2jqZRdQi10V3iYS99iwfRQmK3KnhPGGLGg_gzGUxdPW4uGnCVKQ1L-8UeJ-Jfh3uVip5hgNY7gCrDOd6Ye9QI4EOulTO88_I85eZlYbjqUoxx90ErFqprXF5slBl36D4HZj4Y0Wx-0BIQNj5my2tXo_kHLS61HUS3dlFOUOWvdHA3LK6r1T2WPUWSBgFB6xJnYXVXCIZdHVR4sTeamLUiqJapDAYVoroMJO995ifWLwxKKdJyyvpE2xnurRqrVrjNQX-THl9lrjy61HcExxhbRy8SXmx9-0RjcPwsJcn1e9kdaoUtOeL-Q
+
+### Récupérer une offre spécifique -OK
+GET http://127.0.0.1:8000/api/offers/1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDIyOTM3MjUsImV4cCI6MTc0MjI5NzMyNSwicm9sZXMiOlsiUk9MRV9BRE1JTiJdLCJ1c2VybmFtZSI6ImFkbWluM0BleGFtcGxlLmNvbSJ9.RennpE6GNeThdhjAleXED0PJ-miFPRjwwYPMV2Ecf7wxwZVxSQQt-emEqFWnWdgbSblAet6Nz_mH8c8I_Q2cm1brWCC2BLTRw1EVyJ6yO_8gk7sZPF4V1sXEHqGZScOoPkZColHsEyONANPoNLJ5ajxHyAp7zwkdTr53SnfUb0C0vmZWJBJ9dpGPTWLZIHl4E0yGTkJeXv9BaGNBJqxlFcuFl8yN18sY_TzxJL-UdIXGg3BX2nBDjLtr8SeDALoBoqQz9_MASLxhaEpXUKTpYkkT_H7AQ5P2ZdLDU4NHtkbVRLh4D-JCcY3T7w7lWXZAmmDF4WmVw9eTsguqlV3s0A
+
+### Modifier une offre (🔐 Admin uniquement)  -OK
+PUT http://127.0.0.1:8000/api/offers/1
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDIyOTM3MjUsImV4cCI6MTc0MjI5NzMyNSwicm9sZXMiOlsiUk9MRV9BRE1JTiJdLCJ1c2VybmFtZSI6ImFkbWluM0BleGFtcGxlLmNvbSJ9.RennpE6GNeThdhjAleXED0PJ-miFPRjwwYPMV2Ecf7wxwZVxSQQt-emEqFWnWdgbSblAet6Nz_mH8c8I_Q2cm1brWCC2BLTRw1EVyJ6yO_8gk7sZPF4V1sXEHqGZScOoPkZColHsEyONANPoNLJ5ajxHyAp7zwkdTr53SnfUb0C0vmZWJBJ9dpGPTWLZIHl4E0yGTkJeXv9BaGNBJqxlFcuFl8yN18sY_TzxJL-UdIXGg3BX2nBDjLtr8SeDALoBoqQz9_MASLxhaEpXUKTpYkkT_H7AQ5P2ZdLDU4NHtkbVRLh4D-JCcY3T7w7lWXZAmmDF4WmVw9eTsguqlV3s0A
+
+{
+  "name": "Billet Ultra VIP",
+  "description": "Accès ultra premium",
+  "price": 170.00
+}
+
+### Supprimer une offre (🔐 Admin uniquement) - OK
+DELETE http://127.0.0.1:8000/api/offers/1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDIyOTM3MjUsImV4cCI6MTc0MjI5NzMyNSwicm9sZXMiOlsiUk9MRV9BRE1JTiJdLCJ1c2VybmFtZSI6ImFkbWluM0BleGFtcGxlLmNvbSJ9.RennpE6GNeThdhjAleXED0PJ-miFPRjwwYPMV2Ecf7wxwZVxSQQt-emEqFWnWdgbSblAet6Nz_mH8c8I_Q2cm1brWCC2BLTRw1EVyJ6yO_8gk7sZPF4V1sXEHqGZScOoPkZColHsEyONANPoNLJ5ajxHyAp7zwkdTr53SnfUb0C0vmZWJBJ9dpGPTWLZIHl4E0yGTkJeXv9BaGNBJqxlFcuFl8yN18sY_TzxJL-UdIXGg3BX2nBDjLtr8SeDALoBoqQz9_MASLxhaEpXUKTpYkkT_H7AQ5P2ZdLDU4NHtkbVRLh4D-JCcY3T7w7lWXZAmmDF4WmVw9eTsguqlV3s0A
+
+### Créer un Admin avec first_name et last_name - OK
+POST http://127.0.0.1:8000/api/users/register
+Content-Type: application/json
+
+{
+  "first_name": "Kiki",
+  "last_name": "two",
+  "email": "admin3@example.com",
+  "password": "admin456",
+  "roles": ["ROLE_ADMIN"]
+}
+### Connexion d'un Admin pour récupérer un token JWT - OK
+POST http://127.0.0.1:8000/api/login
+Content-Type: application/json
+
+{
+  "email": "admin@example.com",
+  "password": "adminpassword"
+}
+
+### CREER UNE COMMANDE - OK
+POST http://127.0.0.1:8000/api/orders
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDMwNzkwOTQsImV4cCI6MTc0MzA4MjY5NCwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoidXRpbGlzYXRldXJAZXhhbXBsZS5jb20ifQ.ZTJssJGI6EOBzdU4tUIWcRyGEVV8J4FY2jqZRdQi10V3iYS99iwfRQmK3KnhPGGLGg_gzGUxdPW4uGnCVKQ1L-8UeJ-Jfh3uVip5hgNY7gCrDOd6Ye9QI4EOulTO88_I85eZlYbjqUoxx90ErFqprXF5slBl36D4HZj4Y0Wx-0BIQNj5my2tXo_kHLS61HUS3dlFOUOWvdHA3LK6r1T2WPUWSBgFB6xJnYXVXCIZdHVR4sTeamLUiqJapDAYVoroMJO995ifWLwxKKdJyyvpE2xnurRqrVrjNQX-THl9lrjy61HcExxhbRy8SXmx9-0RjcPwsJcn1e9kdaoUtOeL-Q
+
+{
+  "offer_id": 3,
+  "quantity": 2
+}
+
+### Connexion d'un User pour récupérer un token JWT - OK
+POST http://127.0.0.1:8000/api/login
+Content-Type: application/json
+
+{
+  "email": "utilisateur@example.com",
+  "password": "passe123"
+}
+### Simuler le paiement d'une commande - OK
+POST http://127.0.0.1:8000/api/orders/2/pay
+Content-Type: application/json
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDMwNzkwOTQsImV4cCI6MTc0MzA4MjY5NCwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoidXRpbGlzYXRldXJAZXhhbXBsZS5jb20ifQ.ZTJssJGI6EOBzdU4tUIWcRyGEVV8J4FY2jqZRdQi10V3iYS99iwfRQmK3KnhPGGLGg_gzGUxdPW4uGnCVKQ1L-8UeJ-Jfh3uVip5hgNY7gCrDOd6Ye9QI4EOulTO88_I85eZlYbjqUoxx90ErFqprXF5slBl36D4HZj4Y0Wx-0BIQNj5my2tXo_kHLS61HUS3dlFOUOWvdHA3LK6r1T2WPUWSBgFB6xJnYXVXCIZdHVR4sTeamLUiqJapDAYVoroMJO995ifWLwxKKdJyyvpE2xnurRqrVrjNQX-THl9lrjy61HcExxhbRy8SXmx9-0RjcPwsJcn1e9kdaoUtOeL-Q
+### Récupérer le QR Code du e-billet - OK
+GET http://127.0.0.1:8000/api/orders/1/qrcode
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDIzNzQ1NTksImV4cCI6MTc0MjM3ODE1OSwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoidXRpbGlzYXRldXJAZXhhbXBsZS5jb20ifQ.hXvW_rt7XrRFOIixxMqzyH7QVne3v_ZNzPZsWSMiIPcHulnMFFLwFq2lJJtRJllwYzGJyZNE0gmKDQjnJ98Hj6IFxiGnEEGp8O_5aI_5Sb_gz8Je60hFyU3OXv8Ikv3QAiGArtfrQsY3kdoUC8H5bsn8SQKDLszu6ELMwa-QMUARkfecU4YmkxGnHn5Ti9H5MriBYS-ua0-53SvM4PHdEfYCngP76fm3wMvo-HjL3DwW6E2e2IpMI-uX-y1B4wITpG-tR2khp49Okf3QIRKrEftRutiMI2deqBocj_raZPwjutuzhzUVJ8o0R8SsAahpCuPHPyG2jn6x_nlLyR6hQw
+
+### Télécharger le QR Code du e-billet - OK
+GET http://127.0.0.1:8000/api/orders/1/qrcode/download
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDIzMDQ3MDQsImV4cCI6MTc0MjMwODMwNCwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoidXRpbGlzYXRldXJAZXhhbXBsZS5jb20ifQ.EQVHL6EY5j4V4MsI5xkrA_12q3iJHirpS_TCIilgvzvDtJRCPA6E3vce2xs4rYu4VQy8OqR896wok0j2Ij0hecv1bjySKjBeoT3UgmvnhszJ_G-QD5JIDpICGEHZ9x1DQC0naslx4ty-zEmxL0WJo9fsNCBECZyqX-hR-wq0jWrWTJO8tErv1FJxDSRoQPz36qsfNh9a_bNx_000xT-yZB1zneaGulITi7XfZVXO-5pxyKQHe2c2b6FdVVdncQZ-N-OwzzivhrQlPrzbogAtTcxtIl5Fu6A1veAU5Qs5_U94EeZnOttSfaD8Y9mL0hc4C5wljim8EKO1X6Ld_ds2NQ
+
+### Vérifier un billet avec un QR Code - OK
+GET http://127.0.0.1:8000/api/orders/verify-ticket/4d021d9ea5ccc1887a2c8b496c31aad5
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDMwNzg2MDMsImV4cCI6MTc0MzA4MjIwMywicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6ImFkbWluQGV4YW1wbGUuY29tIn0.WY1FSy04SSObjT4T2iKeuzLxytxln3B-g9oJ99gsVNNIoMixg7aPzXlxWNVg6dMCJDtbQyzXZVkEOQCrhGbcYy5gZveOZ1ifYiR7R1u_1-g0vJvQ1AiHQHWPs93FEiT0Hf8p5xebcCHcurYL8cxIQ3msXdNPy96QFfMQ19dGYP-Fj-pzJMGGsF9RBK1uJ1qzFz9Dza69AohjMEv7OJzjTM3ZP7c4r_nhOrtFL7FAKi9N7l2zzaotgImh-XvDWFRn3dam0whBLJEDnxcAdvTD2559AuwyyMfE2skoO09vLe-3Ww0zqT3KDql5KqFPpU6LC0nFlzbNLFFWtdAeKjrNSA
+
+### Vérifier un billet (ADMIN REQUIS) - OK
+GET http://127.0.0.1:8000/api/orders/verify-ticket/945b2aa394a522cb32d3f960570e340b
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDIzMjM4MDksImV4cCI6MTc0MjMyNzQwOSwicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6ImFkbWluQGV4YW1wbGUuY29tIn0.o18PCAqTblbbcsBat1QhZVMxTLMpEs8umWqZmtn2BBcmNTg6n99ZWKKVmf3S3_GP4WQXwD1_3y1U7B675ph2bJpZDBysk6idaGS40CplR3aM6NhzUVF3iTIsP-tVl4cSYdGFFMgnUeAM1G-2h7DLCpLC0CGJxNks_7rqBm8mO-PVH6wYB5wYAFoAuWcof5fDLhxMzS14-XZCFI7PBnsKTOOitnFNkDM9v8KWkUzGq6fPHu2a1ZbWiQ9OP18w0w48F4T2v8Dxryo7PRT4yXPqhcjt8TwML8pOcf9QN6NP1o5srMbq2dHHwtWeBBPbe5zLNVQc0gqWrKoCZWg2pwSmcw
+
+### Vérifier un billet déjà scanné - OK
+GET http://127.0.0.1:8000/api/orders/verify-ticket/945b2aa394a522cb32d3f960570e340b
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDIzMjM4MDksImV4cCI6MTc0MjMyNzQwOSwicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6ImFkbWluQGV4YW1wbGUuY29tIn0.o18PCAqTblbbcsBat1QhZVMxTLMpEs8umWqZmtn2BBcmNTg6n99ZWKKVmf3S3_GP4WQXwD1_3y1U7B675ph2bJpZDBysk6idaGS40CplR3aM6NhzUVF3iTIsP-tVl4cSYdGFFMgnUeAM1G-2h7DLCpLC0CGJxNks_7rqBm8mO-PVH6wYB5wYAFoAuWcof5fDLhxMzS14-XZCFI7PBnsKTOOitnFNkDM9v8KWkUzGq6fPHu2a1ZbWiQ9OP18w0w48F4T2v8Dxryo7PRT4yXPqhcjt8TwML8pOcf9QN6NP1o5srMbq2dHHwtWeBBPbe5zLNVQc0gqWrKoCZWg2pwSmcw
+
+### VOIR TOUTES LES COMMANDES - OK
+GET http://127.0.0.1:8000/api/orders/all
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDMwNzg2MDMsImV4cCI6MTc0MzA4MjIwMywicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6ImFkbWluQGV4YW1wbGUuY29tIn0.WY1FSy04SSObjT4T2iKeuzLxytxln3B-g9oJ99gsVNNIoMixg7aPzXlxWNVg6dMCJDtbQyzXZVkEOQCrhGbcYy5gZveOZ1ifYiR7R1u_1-g0vJvQ1AiHQHWPs93FEiT0Hf8p5xebcCHcurYL8cxIQ3msXdNPy96QFfMQ19dGYP-Fj-pzJMGGsF9RBK1uJ1qzFz9Dza69AohjMEv7OJzjTM3ZP7c4r_nhOrtFL7FAKi9N7l2zzaotgImh-XvDWFRn3dam0whBLJEDnxcAdvTD2559AuwyyMfE2skoO09vLe-3Ww0zqT3KDql5KqFPpU6LC0nFlzbNLFFWtdAeKjrNSA
+
+### VOIR UNE COMMANDE SPECIFIQUE - OK
+GET http://127.0.0.1:8000/api/orders/1
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDMwNzg2MDMsImV4cCI6MTc0MzA4MjIwMywicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6ImFkbWluQGV4YW1wbGUuY29tIn0.WY1FSy04SSObjT4T2iKeuzLxytxln3B-g9oJ99gsVNNIoMixg7aPzXlxWNVg6dMCJDtbQyzXZVkEOQCrhGbcYy5gZveOZ1ifYiR7R1u_1-g0vJvQ1AiHQHWPs93FEiT0Hf8p5xebcCHcurYL8cxIQ3msXdNPy96QFfMQ19dGYP-Fj-pzJMGGsF9RBK1uJ1qzFz9Dza69AohjMEv7OJzjTM3ZP7c4r_nhOrtFL7FAKi9N7l2zzaotgImh-XvDWFRn3dam0whBLJEDnxcAdvTD2559AuwyyMfE2skoO09vLe-3Ww0zqT3KDql5KqFPpU6LC0nFlzbNLFFWtdAeKjrNSA
+
+### TELECHARGER UN BILLET - OK
+GET http://127.0.0.1:8000/api/orders/1/download
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDMwNzc3MTUsImV4cCI6MTc0MzA4MTMxNSwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoidXRpbGlzYXRldXJAZXhhbXBsZS5jb20ifQ.IGsjPIXo-Y1oZpNPzLCYZNQjql-S4OH7pYOHYNlkIS_sm6eDqJk5KkuXrWrRbjKGIl3xgKptyb5HJBi51BB2kZSe9u0cFhC4i9rjtBSbeiVRJANNL5tLg9Vi4qmfpx8bqGEPseu02ExMWp_rYkYU8IHXaCLzsAbSHYJstIHrepFzL3Cu_kWxonKsxZlvgvb0t-ss7gRg2kaDs693l5RjgEhkBxwOCm0xVuthiMbm8nJg8no4q2tWYibGTzyGP6-A2FOChmit5gMhj2Ni2u87cFpAuxDxABwBW_qCxsnuQVTLkwFKEl9YlJyzgwYv5rnep_D7FE05L0UPE28kGuZBwQ
+
+### envoyer mail - OK
+POST http://127.0.0.1:8000/api/send-email
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDIzODA1MDgsImV4cCI6MTc0MjM4NDEwOCwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoidXRpbGlzYXRldXJAZXhhbXBsZS5jb20ifQ.khuiQp69zYweToKNjvkuDQyGuAx0QvNS_FWZPnBatDQATxy1krpjgdVF5kaU5V7yvOk6txRJxcbR0L6NGnxlSiO3abmQUx-igqnsqAyzd3SFrR19st1C7pJEe3K-JlkaA86kps4i6WYfmpCEl71tvSP7Tv0WsT2ZvgOlJvSrI1eJBm908U1_lJW2MZhek8dGePsBbN6uKxGU5OP0fQX8GRiNbF0pFTGyacWQpP6FW5hmc41cLfx1zpi5pS1RWjCDpZU7jqWyhblJ0jkv4vwtlxYwqJxAtt1SPSKozTEHT_tAwhFDo0EkGP6ilnxqtU5CsiP_v1S-ukuB9QbY9zFqSg
