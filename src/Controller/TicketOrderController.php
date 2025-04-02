@@ -131,10 +131,12 @@ class TicketOrderController extends AbstractController
 
         $order->setStatus('PAID');
         $order->setOrderKey(bin2hex(random_bytes(16))); // Génération d'une clé unique
+        $order->setValidatedAt(new \DateTime()); // ✅ Ajout ici
 
         $entityManager->flush();
 
-        return new JsonResponse(['message' => 'Paiement effectué avec succès', 'order_key' => $order->getOrderKey()]);
+        return new JsonResponse(['message' => 'Paiement effectué avec succès', 'order_key' => $order->getOrderKey(),
+            'validated_at' => $order->getValidatedAt()->format('Y-m-d H:i:s')]); // ✅ Renvoi ici
     }
 
 
