@@ -53,7 +53,7 @@ class TicketOrderController extends AbstractController
         $order->setUser($this->getUser());
         $order->setOffer($offer);
         $order->setQuantity($data['quantity']);
-        $order->setOrderKey(bin2hex(random_bytes(16))); // ✅ à garder
+        $order->setOrderKey(bin2hex(random_bytes(16)));
         $this->generateQrCode($order->getOrderKey());
 
 
@@ -131,12 +131,13 @@ class TicketOrderController extends AbstractController
 
         $order->setStatus('PAID');
         $order->setOrderKey(bin2hex(random_bytes(16))); // Génération d'une clé unique
-        $order->setValidatedAt(new \DateTime()); // ✅ Ajout ici
+
 
         $entityManager->flush();
 
-        return new JsonResponse(['message' => 'Paiement effectué avec succès', 'order_key' => $order->getOrderKey(),
-            'validated_at' => $order->getValidatedAt()->format('Y-m-d H:i:s')]); // ✅ Renvoi ici
+        return new JsonResponse(['message' => 'Paiement effectué avec succès', 'order_key' => $order->getOrderKey()
+
+        ]);
     }
 
 
@@ -260,43 +261,71 @@ class TicketOrderController extends AbstractController
 
     #[Route('/verify-ticket/{order_key}', name: 'verify_ticket', methods: ['GET'])]
     #[IsGranted('ROLE_ADMIN')]
-    public function verifyTicket(TicketOrderRepository $orderRepository, EntityManagerInterface $entityManager, string $order_key): JsonResponse
-    {
+    public function verifyTicket(
+        TicketOrderRepository $orderRepository,
+        EntityManagerInterface $entityManager,
+        string $order_key
+    ): JsonResponse {
         $order = $orderRepository->findOneBy(['orderKey' => $order_key]);
 
         if (!$order) {
-            return new JsonResponse(['status' => 'error', 'message' => 'Billet invalide ou inexistant'], 404);
+            return new JsonResponse([
+                'status' => 'error',
+                'message' => 'Billet introuvable',
+                'code' => 'ticket_not_found' // 👈 Code d'erreur standardisé
+            ], 404);
         }
 
+        // Vérifications en cascade (logique métier)
         if ($order->getStatus() === 'USED') {
-            return new JsonResponse(['status' => 'error', 'message' => 'Billet déjà utilisé'], 400);
+            return new JsonResponse([
+                'status' => 'error',
+                'message' => 'Ce billet a déjà été utilisé le ' . $order->getValidatedAt()->format('d/m/Y H:i'),
+                'code' => 'ticket_already_used',
+                'validated_at' => $order->getValidatedAt()->format('Y-m-d H:i:s')
+            ], 400);
         }
 
         if ($order->getStatus() !== 'PAID') {
-            return new JsonResponse(['status' => 'error', 'message' => 'Billet non payé'], 400);
+            return new JsonResponse([
+                'status' => 'error',
+                'message' => 'Billet non payé. Statut actuel : ' . $order->getStatus(),
+                'code' => 'ticket_not_paid'
+            ], 400);
         }
 
-        // Marquer le billet comme utilisé
+        // 👇 Empêcher la réutilisation si déjà validé (mais statut pas à USED)
+        if ($order->getValidatedAt() !== null) {
+            $order->setStatus('USED');
+            $entityManager->flush();
+
+            return new JsonResponse([
+                'status' => 'error',
+                'message' => 'Billet déjà validé (mais marqué comme USED maintenant)',
+                'code' => 'ticket_already_validated'
+            ], 400);
+        }
+
+        // 👇 Tout est OK : validation finale
         $order->setStatus('USED');
         $order->setValidatedAt(new \DateTime());
-
-        $entityManager->persist($order);
         $entityManager->flush();
 
         return new JsonResponse([
             'status' => 'success',
-            'message' => 'Billet valide et enregistré comme utilisé',
+            'message' => 'Billet validé avec succès',
             'order_id' => $order->getId(),
             'user' => $order->getUser()->getEmail(),
             'offer' => $order->getOffer()->getName(),
             'validated_at' => $order->getValidatedAt()->format('Y-m-d H:i:s'),
+            'qr_code' => '/api/orders/' . $order->getId() . '/qrcode' // 👈 Lien utile
         ]);
     }
 
 
     private function generateQrCode(string $orderKey): string
     {
-        $qrCode = new QrCode('http://127.0.0.1:8000/api/orders/verify-ticket/' . $orderKey);
+        $qrCode = new QrCode($orderKey);
 
         $writer = new PngWriter();
         $result = $writer->write($qrCode);
@@ -307,7 +336,6 @@ class TicketOrderController extends AbstractController
 
         return $qrCodePath;
     }
-
 
 
 }
