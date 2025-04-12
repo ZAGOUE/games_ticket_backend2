@@ -83,6 +83,17 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDIyOTM3M
   "max_people": 4
 }
 
+### Modifier l'intitulé d'une offre
+PUT http://127.0.0.1:8000/api/offers/2
+Authorization: Bearer <token_admin>
+Content-Type: application/json
+
+{
+  "name": "Billet Duo",
+  "description": "Billet pour 2 personnes"
+}
+
+
 ### Lister toutes les offres - OK
 GET http://127.0.0.1:8000/api/offers
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDMwNzkwOTQsImV4cCI6MTc0MzA4MjY5NCwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoidXRpbGlzYXRldXJAZXhhbXBsZS5jb20ifQ.ZTJssJGI6EOBzdU4tUIWcRyGEVV8J4FY2jqZRdQi10V3iYS99iwfRQmK3KnhPGGLGg_gzGUxdPW4uGnCVKQ1L-8UeJ-Jfh3uVip5hgNY7gCrDOd6Ye9QI4EOulTO88_I85eZlYbjqUoxx90ErFqprXF5slBl36D4HZj4Y0Wx-0BIQNj5my2tXo_kHLS61HUS3dlFOUOWvdHA3LK6r1T2WPUWSBgFB6xJnYXVXCIZdHVR4sTeamLUiqJapDAYVoroMJO995ifWLwxKKdJyyvpE2xnurRqrVrjNQX-THl9lrjy61HcExxhbRy8SXmx9-0RjcPwsJcn1e9kdaoUtOeL-Q
@@ -184,3 +195,4 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDMwNzc3M
 ### envoyer mail - OK
 POST http://127.0.0.1:8000/api/send-email
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDIzODA1MDgsImV4cCI6MTc0MjM4NDEwOCwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoidXRpbGlzYXRldXJAZXhhbXBsZS5jb20ifQ.khuiQp69zYweToKNjvkuDQyGuAx0QvNS_FWZPnBatDQATxy1krpjgdVF5kaU5V7yvOk6txRJxcbR0L6NGnxlSiO3abmQUx-igqnsqAyzd3SFrR19st1C7pJEe3K-JlkaA86kps4i6WYfmpCEl71tvSP7Tv0WsT2ZvgOlJvSrI1eJBm908U1_lJW2MZhek8dGePsBbN6uKxGU5OP0fQX8GRiNbF0pFTGyacWQpP6FW5hmc41cLfx1zpi5pS1RWjCDpZU7jqWyhblJ0jkv4vwtlxYwqJxAtt1SPSKozTEHT_tAwhFDo0EkGP6ilnxqtU5CsiP_v1S-ukuB9QbY9zFqSg
+
