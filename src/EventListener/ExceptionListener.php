@@ -4,6 +4,7 @@ namespace App\EventListener;
 
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpKernel\Event\ExceptionEvent;
+use Symfony\Component\HttpKernel\Exception\NotFoundHttpException;
 use Symfony\Component\Security\Core\Exception\AccessDeniedException;
 use Symfony\Component\EventDispatcher\Attribute\AsEventListener;
 
@@ -22,5 +23,15 @@ class ExceptionListener
 
             $event->setResponse($response);
         }
+        if ($exception instanceof NotFoundHttpException) {
+            $response = new JsonResponse([
+                'status' => 'error',
+                'message' => "Page non trouvée",
+                'code' => 'ticket_not_found'
+
+            ], 404);
+            $event->setResponse($response);
+        }
     }
+
 }

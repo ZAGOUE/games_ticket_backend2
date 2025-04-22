@@ -130,7 +130,7 @@ class TicketOrderController extends AbstractController
         }
 
         $order->setStatus('PAID');
-        $order->setOrderKey(bin2hex(random_bytes(16))); // Génération d'une clé unique
+        $order->setOrderKey(bin2hex(random_bytes(16))); // Génération d'une clé unique 32 caractères hexadécimaux
 
 
         $entityManager->flush();
@@ -165,8 +165,6 @@ class TicketOrderController extends AbstractController
 
 
 
-    #[Route('/{id}/download', name: 'download_ticket', methods: ['GET'])]
-    #[IsGranted('ROLE_USER')]
     #[Route('/{id}/download', name: 'download_ticket', methods: ['GET'])]
     #[IsGranted('ROLE_USER')]
     public function downloadTicket(TicketOrderRepository $orderRepository, int $id, Security $security): Response
@@ -260,7 +258,7 @@ class TicketOrderController extends AbstractController
 
 
     #[Route('/verify-ticket/{order_key}', name: 'verify_ticket', methods: ['GET'])]
-    #[IsGranted('ROLE_ADMIN')]
+    #[IsGranted('ROLE_CONTROLLER')]
     public function verifyTicket(
         TicketOrderRepository $orderRepository,
         EntityManagerInterface $entityManager,
@@ -315,7 +313,12 @@ class TicketOrderController extends AbstractController
             'status' => 'success',
             'message' => 'Billet validé avec succès',
             'order_id' => $order->getId(),
-            'user' => $order->getUser()->getEmail(),
+            'user' => [
+                'email' => $order->getUser()->getEmail(),
+                'first_name' => $order->getUser()->getFirstName(),
+                'last_name' => $order->getUser()->getLastName(),
+            ],
+
             'offer' => $order->getOffer()->getName(),
             'validated_at' => $order->getValidatedAt()->format('Y-m-d H:i:s'),
             'qr_code' => '/api/orders/' . $order->getId() . '/qrcode' // 👈 Lien utile

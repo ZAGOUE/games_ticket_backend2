@@ -21,10 +21,10 @@ security:
             security: false
 
         login:
-            pattern: ^/api/login
+            pattern: ^/api/login_check
             stateless: true
             json_login:
-                check_path: /api/login
+                check_path: /api/login_check
                 username_path: email
                 password_path: password
                 success_handler: lexik_jwt_authentication.handler.authentication_success
@@ -36,9 +36,11 @@ security:
             jwt: ~
 
     access_control:
+        - { path: ^/api/send-email, roles: PUBLIC_ACCESS }
+        - { path: ^/api/offers$, roles: PUBLIC_ACCESS, methods: [ GET ] }
         - { path: ^/api/login, roles: PUBLIC_ACCESS }
         - { path: ^/api/orders/all, roles: ROLE_ADMIN }
-        - { path: ^/api/orders/verify-ticket, roles: ROLE_ADMIN }
+        - { path: ^/api/orders/verify-ticket, roles: ROLE_CONTROLLER }
         - { path: ^/api, roles: IS_AUTHENTICATED_FULLY }
         - { path: ^/api/offers, roles: ROLE_ADMIN, methods: [ POST, PUT, DELETE ] }
 
