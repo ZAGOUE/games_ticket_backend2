@@ -353,7 +353,7 @@ class TicketOrderControllerTest extends WebTestCase
         $email = 'ticket' . uniqid() . '@example.com';
         $password = 'Password123!';
 
-        // 🔐 Création et connexion d’un utilisateur
+        // Création et connexion d’un utilisateur
         $client->request('POST', '/api/users/register', [], [], ['CONTENT_TYPE' => 'application/json'], json_encode([
             'first_name' => 'Jean',
             'last_name' => 'Billet',
@@ -367,7 +367,7 @@ class TicketOrderControllerTest extends WebTestCase
         ]));
         $token = json_decode($client->getResponse()->getContent(), true)['token'];
 
-        // 🎫 Création d’une offre par un faux "admin"
+        // Création d’une offre par un faux "admin"
         $offer = new \App\Entity\Offer();
         $offer->setName('Billet PDF');
         $offer->setDescription('PDF généré');
@@ -376,7 +376,7 @@ class TicketOrderControllerTest extends WebTestCase
         $em->persist($offer);
         $em->flush();
 
-        // 🧾 Création d’une commande
+        // Création d’une commande
         $client->request('POST', '/api/orders', [], [], [
             'CONTENT_TYPE' => 'application/json',
             'HTTP_Authorization' => 'Bearer ' . $token
@@ -386,7 +386,7 @@ class TicketOrderControllerTest extends WebTestCase
         ]));
         $this->assertResponseStatusCodeSame(201);
 
-        // 💳 Paiement de la commande
+        // Paiement de la commande
         $user = $em->getRepository(\App\Entity\User::class)->findOneBy(['email' => $email]);
         $order = $em->getRepository(\App\Entity\TicketOrder::class)->findOneBy(['user' => $user]);
 
@@ -395,7 +395,7 @@ class TicketOrderControllerTest extends WebTestCase
         ]);
         $this->assertResponseIsSuccessful();
 
-        // ⬇️ Télécharger le billet (PDF attendu)
+        // Télécharger le billet (PDF attendu)
         $client->request('GET', '/api/orders/' . $order->getId() . '/download', [], [], [
             'HTTP_Authorization' => 'Bearer ' . $token
         ]);

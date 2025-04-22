@@ -1,6 +1,6 @@
 <?php
 
-// tests/Entity/UserTest.php
+
 namespace App\Tests\Entity;
 
 use App\Entity\User;
@@ -26,6 +26,6 @@ class UserTest extends TestCase
 
         $user->setRoles(['ROLE_ADMIN']);
         $this->assertContains('ROLE_ADMIN', $user->getRoles());
-        $this->assertContains('ROLE_USER', $user->getRoles()); // toujours présent
+        $this->assertContains('ROLE_USER', $user->getRoles());
     }
 }

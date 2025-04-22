@@ -1,6 +1,6 @@
 <?php
 
-// tests/Controller/AuthControllerTest.php
+
 namespace App\Tests\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;

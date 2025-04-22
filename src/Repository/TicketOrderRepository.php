@@ -12,4 +12,15 @@ class TicketOrderRepository extends ServiceEntityRepository
     {
         parent::__construct($registry, TicketOrder::class);
     }
+    public function countOrdersGroupedByOffer(): array
+    {
+        return $this->createQueryBuilder('o')
+            ->join('o.offer', 'offerEntity')
+            ->select('offerEntity.name AS offer', 'COUNT(o.id) AS total')
+            ->groupBy('offerEntity.name')
+            ->getQuery()
+            ->getArrayResult();
+    }
+
+
 }

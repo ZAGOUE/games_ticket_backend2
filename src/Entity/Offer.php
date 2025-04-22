@@ -34,7 +34,7 @@ class Offer
 
     public function __construct()
     {
-        $this->created_at = new DateTimeImmutable(); // Initialisation automatique
+        $this->created_at = new DateTimeImmutable();
     }
 
     public function getId(): ?int

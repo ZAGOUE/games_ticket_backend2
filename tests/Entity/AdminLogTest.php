@@ -2,7 +2,7 @@
 
 namespace App\Tests\Entity;
 
-use App\Entity\User;
+
 use App\Entity\AdminLog;
 use PHPUnit\Framework\TestCase;
 

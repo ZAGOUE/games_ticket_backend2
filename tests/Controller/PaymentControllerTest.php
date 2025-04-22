@@ -164,7 +164,7 @@ public function testAnotherUserCannotPaySomeoneElsesOrder(): void
 
     public function testAdminCanViewAllPayments(): void
     {
-        // 🔐 Appel direct à /api/payments avec le token admin déjà configuré
+        // Appel direct à /api/payments avec le token admin déjà configuré
         $this->client->request('GET', '/api/payments', [], [], [
             'HTTP_Authorization' => 'Bearer ' . $this->adminToken
         ]);

@@ -10,7 +10,7 @@ class MailerControllerTest extends WebTestCase
     {
         $client = static::createClient();
 
-        // 🔐 Création utilisateur + login
+        // Création utilisateur + login
         $email = 'mailtest' . uniqid() . '@example.com';
         $password = 'Password123!';
         $client->request('POST', '/api/users/register', [], [], ['CONTENT_TYPE' => 'application/json'], json_encode([
@@ -25,7 +25,7 @@ class MailerControllerTest extends WebTestCase
         ]));
         $token = json_decode($client->getResponse()->getContent(), true)['token'];
 
-        // ✅ Appel protégé avec token
+        // Appel protégé avec token
         $client->request('POST', '/api/send-email', [], [], [
             'CONTENT_TYPE' => 'application/json',
             'HTTP_Authorization' => 'Bearer ' . $token

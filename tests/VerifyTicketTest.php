@@ -12,7 +12,7 @@ class VerifyTicketTest extends WebTestCase
         $container = static::getContainer();
         $entityManager = $container->get('doctrine')->getManager();
 
-        // 🔐 1. Créer un ADMIN et une offre
+        // 1. Créer un ADMIN et une offre
         $adminEmail = 'admin' . uniqid() . '@example.com';
         $password = 'Admin123!';
 
@@ -45,7 +45,7 @@ class VerifyTicketTest extends WebTestCase
         $offer = $entityManager->getRepository(\App\Entity\Offer::class)->findOneBy(['name' => 'Offre JO Test']);
         $this->assertNotNull($offer);
 
-        // 👤 2. Créer un USER et commander
+        // 2. Créer un USER et commander
         $userEmail = 'user' . uniqid() . '@example.com';
 
         $client->request('POST', '/api/users/register', [], [], ['CONTENT_TYPE' => 'application/json'], json_encode([
@@ -72,7 +72,7 @@ class VerifyTicketTest extends WebTestCase
         ]));
         $this->assertResponseStatusCodeSame(201);
 
-        // 🔁 3. Récupérer la commande + la payer
+        // 3. Récupérer la commande + la payer
         $order = $entityManager->getRepository(\App\Entity\TicketOrder::class)->findOneBy(['user' => $user, 'offer' => $offer]);
         $this->assertNotNull($order);
 
@@ -86,7 +86,7 @@ class VerifyTicketTest extends WebTestCase
         $orderKey = $payResponse['order_key'];
 
 
-        // 🧑‍✈️ 4. Créer un contrôleur
+        // ️ 4. Créer un contrôleur
         $controllerEmail = 'controller' . uniqid() . '@example.com';
 
         $client->request('POST', '/api/users/register', [], [], ['CONTENT_TYPE' => 'application/json'], json_encode([
@@ -106,7 +106,7 @@ class VerifyTicketTest extends WebTestCase
         ]));
         $controllerToken = json_decode($client->getResponse()->getContent(), true)['token'];
 
-        // 🔍 5. Vérifier le billet via /verify-ticket/{order_key}
+        //  5. Vérifier le billet via /verify-ticket/{order_key}
         $client->request('GET', '/api/orders/verify-ticket/' . $orderKey, [], [], [
             'HTTP_Authorization' => 'Bearer ' . $controllerToken,
         ]);
@@ -125,7 +125,7 @@ class VerifyTicketTest extends WebTestCase
         $container = static::getContainer();
         $entityManager = $container->get('doctrine')->getManager();
 
-        // 🧠 Reprend le même scénario : création admin + offre
+        //  Reprend le même scénario : création admin + offre
         $emailPrefix = uniqid(); // pour tout isoler proprement
         $password = 'Test123!';
 
@@ -214,13 +214,13 @@ class VerifyTicketTest extends WebTestCase
         ]));
         $controllerToken = json_decode($client->getResponse()->getContent(), true)['token'];
 
-        // ✅ 1ère vérification : success
+        // 1ère vérification : success
         $client->request('GET', '/api/orders/verify-ticket/' . $orderKey, [], [], [
             'HTTP_Authorization' => 'Bearer ' . $controllerToken,
         ]);
         $this->assertResponseIsSuccessful();
 
-        // ❌ 2e vérification : échec attendu
+        //  2e vérification : échec attendu
         $client->request('GET', '/api/orders/verify-ticket/' . $orderKey, [], [], [
             'HTTP_Authorization' => 'Bearer ' . $controllerToken,
         ]);

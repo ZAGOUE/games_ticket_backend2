@@ -1,5 +1,5 @@
 <?php
-// src/EventListener/ExceptionListener.php
+
 namespace App\EventListener;
 
 use Symfony\Component\HttpFoundation\JsonResponse;

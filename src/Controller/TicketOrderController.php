@@ -17,14 +17,10 @@ use Endroid\QrCode\QrCode;
 use Endroid\QrCode\Writer\PngWriter;
 use Symfony\Component\HttpFoundation\Response;
 
-use Symfony\Component\HttpFoundation\BinaryFileResponse;
 
 use TCPDF;
 
 
-use Endroid\QrCode\Encoding\Encoding;
-use Endroid\QrCode\ErrorCorrectionLevel;
-use Endroid\QrCode\RoundBlockSizeMode;
 
 
 
@@ -186,8 +182,6 @@ class TicketOrderController extends AbstractController
         $pdf->SetMargins(10, 10, 10);
         $pdf->AddPage();
 
-        // Dessiner les anneaux olympiques directement dans le PDF
-
         // Dessiner les anneaux olympiques centrés sur la page
         function drawOlympicLogo($pdf)
         {
@@ -223,16 +217,16 @@ class TicketOrderController extends AbstractController
 
 
 
-// Appeler la fonction pour dessiner le logo
+        // Appeler la fonction pour dessiner le logo
         drawOlympicLogo($pdf);
 
 
-        // Titre du billet (descendu de 10px)
+        // Titre du billet (mise en page)
         $pdf->SetFont('helvetica', 'B', 20);
         $pdf->Ln(50); // Avant : 25 → Maintenant : 45
         $pdf->Cell(0, 10, 'E-Billet - ' . $order->getOffer()->getName(), 0, 1, 'C');
 
-// Informations sur le billet (descendu légèrement)
+        // Informations sur le billet (mise en page)
         $pdf->SetFont('helvetica', '', 14);
         $pdf->Ln(10); // Avant : 5 → Maintenant : 10
         $pdf->Cell(0, 10, 'Titulaire : ' . $order->getUser()->getEmail(), 0, 1, 'C');
@@ -270,11 +264,12 @@ class TicketOrderController extends AbstractController
             return new JsonResponse([
                 'status' => 'error',
                 'message' => 'Billet introuvable',
-                'code' => 'ticket_not_found' // 👈 Code d'erreur standardisé
+                'code' => 'ticket_not_found'
             ], 404);
         }
 
-        // Vérifications en cascade (logique métier)
+        // Vérifications
+
         if ($order->getStatus() === 'USED') {
             return new JsonResponse([
                 'status' => 'error',
@@ -321,7 +316,7 @@ class TicketOrderController extends AbstractController
 
             'offer' => $order->getOffer()->getName(),
             'validated_at' => $order->getValidatedAt()->format('Y-m-d H:i:s'),
-            'qr_code' => '/api/orders/' . $order->getId() . '/qrcode' // 👈 Lien utile
+            'qr_code' => '/api/orders/' . $order->getId() . '/qrcode'
         ]);
     }
 

@@ -1,6 +1,6 @@
 <?php
 
-// tests/EventListener/ExceptionListenerFunctionalTest.php
+
 namespace App\Tests\EventListener;
 
 use Symfony\Bundle\FrameworkBundle\Test\WebTestCase;

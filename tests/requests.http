@@ -26,7 +26,7 @@ Content-Type: application/json
 }
 
 ### Authentification (Login) - OK
-POST http://127.0.0.1:8000/api/login
+POST http://127.0.0.1:8000/api/login_check
 Content-Type: application/json
 
 {
@@ -141,7 +141,7 @@ Content-Type: application/json
   "roles": ["ROLE_CONTROLLER"]
 }
 ### Connexion d'un Admin pour récupérer un token JWT - OK
-POST http://127.0.0.1:8000/api/login
+POST http://127.0.0.1:8000/api/login_check
 Content-Type: application/json
 
 {
@@ -169,7 +169,7 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDQ3MTUxN
 }
 
 ### Connexion d'un User pour récupérer un token JWT - OK
-POST http://127.0.0.1:8000/api/login
+POST http://127.0.0.1:8000/api/login_check
 Content-Type: application/json
 
 {
@@ -218,3 +218,6 @@ Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDMwNzc3M
 POST http://127.0.0.1:8000/api/send-email
 Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDIzODA1MDgsImV4cCI6MTc0MjM4NDEwOCwicm9sZXMiOlsiUk9MRV9VU0VSIl0sInVzZXJuYW1lIjoidXRpbGlzYXRldXJAZXhhbXBsZS5jb20ifQ.khuiQp69zYweToKNjvkuDQyGuAx0QvNS_FWZPnBatDQATxy1krpjgdVF5kaU5V7yvOk6txRJxcbR0L6NGnxlSiO3abmQUx-igqnsqAyzd3SFrR19st1C7pJEe3K-JlkaA86kps4i6WYfmpCEl71tvSP7Tv0WsT2ZvgOlJvSrI1eJBm908U1_lJW2MZhek8dGePsBbN6uKxGU5OP0fQX8GRiNbF0pFTGyacWQpP6FW5hmc41cLfx1zpi5pS1RWjCDpZU7jqWyhblJ0jkv4vwtlxYwqJxAtt1SPSKozTEHT_tAwhFDo0EkGP6ilnxqtU5CsiP_v1S-ukuB9QbY9zFqSg
 
+### Récupération des stats par offre
+GET http://127.0.0.1:8000/api/admin/stats/offers
+Authorization: Bearer eyJ0eXAiOiJKV1QiLCJhbGciOiJSUzI1NiJ9.eyJpYXQiOjE3NDUzMTQwNjksImV4cCI6MTc0NTMxNzY2OSwicm9sZXMiOlsiUk9MRV9BRE1JTiIsIlJPTEVfVVNFUiJdLCJ1c2VybmFtZSI6ImFkbWluQGV4YW1wbGUuY29tIn0.LjfNh2Og5HqLY2Cu0Unqof3e1WcqiPQpJmoh0T6b37SRnIiTMzMN1elzfmtjzAHkoePgQbQbkKqQCd1jx8QMW1TOOuB82OKSHyMabU6PtrdVdmX1kBVgrY1ML78L6NsXYjYE33NVn-Mhc31EvP2YMm1rbXzj8OLfb5SW6ZHOGnRSd9lhs53H3i66W9FdiKhJ9vllWuV20VrwNgTdbKfIjUKVsRZeBwCYKZdtfLmo7IzypOq8NDS7S2xxHzbksXoQ7g3kyQmX5JYjw57HYBzGitdrYI7zO38bprRMRuOxRannKBq4JugInhgMoyCCz66ULgg4FzMTK-aZG4yG7G1NQsU4vjD6Skn3O_8VCxf4Om3eStgQDniYfHOnbDtKY-Iqaw3GzjGYy55fxjyMy1DasoIg2VGTme_RWD8NzWVNTg1GWckvMjIITvH-x3LrN3TXRZQyB6tQvPLXSxMzjTlbd7Fw8AyNO6ZO3-kgGM76u7ej45czLSBV9vXnble8tVy1HYcmmQBVEpvZ2_-Q93sWUVHmo0oARqTvp-Xk_BANawzo00Yw29aCcd9uuTRK7nY0MCCjT0tXOkFQJVUx6kirxd8LqhuDhbhHfHGTUFI3wsZbZaBiilNPiQICRuYzvLkgQu5k-tF-Cb14silgDnCvdeCmefOOcl7mnxflzo-cidg

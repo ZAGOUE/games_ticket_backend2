@@ -1,6 +1,6 @@
 <?php
 
-// tests/Command/TestEmailCommandTest.php
+
 namespace App\Tests\Command;
 
 use Symfony\Bundle\FrameworkBundle\Test\KernelTestCase;
@@ -14,7 +14,7 @@ class TestEmailCommandTest extends KernelTestCase
         self::bootKernel();
         $application = new Application(self::$kernel);
 
-        // ✅ Correctement accédé via getContainer()
+
         $command = self::getContainer()->get(\App\Command\TestEmailCommand::class);
         $application->add($command);
 

@@ -47,7 +47,7 @@ class UserController extends AbstractController
         $user->setEmail($data['email']);
         $user->setPassword($data['password']); // temporaire, non hashé
 
-        // 🚨 Validation du mot de passe
+        // Validation du mot de passe
         $errors = $validator->validate($user);
         if (count($errors) > 0) {
             $errorMessages = [];
@@ -59,14 +59,13 @@ class UserController extends AbstractController
 
         $hashedPassword = $this->passwordHasher->hashPassword($user, $data['password']);
         $user->setPassword($hashedPassword);
-        $user->setRoles(['ROLE_USER']); // 🔐 Rôle forcé côté serveur
+        $user->setRoles(['ROLE_USER']);
 
         $this->entityManager->persist($user);
         $this->entityManager->flush();
 
         return new JsonResponse(['message' => 'Utilisateur créé avec succès'], 201);
     }
-
 
 
     #[Route('/{id}', name: 'get_user_by_id', methods: ['GET'])]
@@ -84,7 +83,6 @@ class UserController extends AbstractController
             'roles' => $user->getRoles()
         ]);
     }
-
 
 
     #[Route('', methods: ['POST'])]
@@ -168,6 +166,25 @@ class UserController extends AbstractController
 
         return $this->json(['message' => 'Utilisateur supprimé avec succès']);
     }
+
+    #[Route('/email/{email}', name: 'get_user_by_email', methods: ['GET'])]
+    public function getUserByEmail(string $email): JsonResponse
+    {
+        $user = $this->userRepository->findOneBy(['email' => $email]);
+
+        if (!$user) {
+            return new JsonResponse(['error' => 'Utilisateur non trouvé'], 404);
+        }
+
+        return new JsonResponse([
+            'id' => $user->getId(),
+            'email' => $user->getEmail(),
+            'first_name' => $user->getFirstName(),
+            'last_name' => $user->getLastName(),
+            'roles' => $user->getRoles()
+        ]);
+    }
+
 
 
 
