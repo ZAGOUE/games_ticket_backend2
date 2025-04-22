@@ -88,6 +88,10 @@ class OfferController extends AbstractController
             }
             $offer->setPrice($data['price']);
         }
+        if (isset($data['max_people'])) {
+            $offer->setMaxPeople($data['max_people']);
+        }
+
 
         $entityManager->flush();
 

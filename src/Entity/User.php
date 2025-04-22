@@ -8,6 +8,10 @@ use Symfony\Component\Security\Core\User\PasswordAuthenticatedUserInterface;
 use Symfony\Component\Security\Core\User\UserInterface;
 use DateTimeImmutable;
 use Random\RandomException;
+use App\Validator\PasswordStrength;
+use Symfony\Component\Validator\Constraints as Assert;
+
+
 
 #[ORM\Entity(repositoryClass: UserRepository::class)]
 class User implements UserInterface, PasswordAuthenticatedUserInterface
@@ -26,8 +30,10 @@ class User implements UserInterface, PasswordAuthenticatedUserInterface
     #[ORM\Column(length: 255, unique: true)]
     private ?string $email;
 
+    #[Assert\NotBlank]
+    #[PasswordStrength]
     #[ORM\Column(length: 255)]
-    private ?string $password;
+    private ?string $password = null;
 
     #[ORM\Column(type: 'string', length: 255, unique: true)]
     private ?string $security_key;
@@ -152,7 +158,6 @@ public function getId(): ?int
 
         return null;
     }
-
 
 
     public function setCreatedAt(\DateTimeImmutable $created_at): static
